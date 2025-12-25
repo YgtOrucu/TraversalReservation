@@ -20,10 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Concreate\" />
     <Folder Include="Abstract\" />
     <Folder Include="EntityFramework\" />
     <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntityLayer\EntityLayer.csproj" />
   </ItemGroup>
 
 </Project>
