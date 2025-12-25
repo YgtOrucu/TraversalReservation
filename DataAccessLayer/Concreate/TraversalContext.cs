@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concreate
 {
-    public class Context : DbContext
+    public class TraversalContext : DbContext
     {
         public DbSet<About> Abouts { get; set; }
         public DbSet<About2> Abouts2 { get; set; }
@@ -31,7 +31,7 @@ namespace DataAccessLayer.Concreate
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TraversalContext).Assembly);
         }
     }
 }
