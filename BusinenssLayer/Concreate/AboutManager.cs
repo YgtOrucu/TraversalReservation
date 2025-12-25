@@ -1,6 +1,8 @@
 ﻿using BusinenssLayer.Abstract;
+using BusinenssLayer.Validations;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,11 @@ namespace BusinenssLayer.Concreate
     public class AboutManager : IAboutService
     {
         private readonly IAboutDal _aboutDal;
-        public AboutManager(IAboutDal aboutDal)
+        private readonly AboutValidations _validationRulesAbout;
+        public AboutManager(IAboutDal aboutDal, AboutValidations validationRulesAbout)
         {
             _aboutDal = aboutDal;
+            _validationRulesAbout = validationRulesAbout;
         }
         public List<About> TGetAllList()
         {
@@ -34,11 +38,15 @@ namespace BusinenssLayer.Concreate
 
         public void TInsert(About entity)
         {
+            var result = _validationRulesAbout.Validate(entity);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _aboutDal.Insert(entity);
         }
 
         public void TUpdate(About entity)
         {
+            var result = _validationRulesAbout.Validate(entity);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _aboutDal.Update(entity);
         }
     }
