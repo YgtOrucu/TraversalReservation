@@ -9,5 +9,6 @@ namespace BusinenssLayer.Abstract
 {
     public interface IGuideService : IGenericService<Guide>
     {
+        int TGetGuideCount();
     }
 }

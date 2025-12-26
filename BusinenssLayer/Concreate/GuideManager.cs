@@ -28,6 +28,11 @@ namespace BusinenssLayer.Concreate
             return _guideDal.GetByID(id);
         }
 
+        public int TGetGuideCount()
+        {
+            return _guideDal.GetGuideCount();
+        }
+
         public List<Guide> TGetListByFilter(Expression<Func<Guide, bool>> filter)
         {
             return _guideDal.GetListByFilter(filter);

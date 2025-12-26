@@ -29,6 +29,11 @@ namespace BusinenssLayer.Concreate
             return _destinationDal.GetByID(id);
         }
 
+        public int TGetDestinationCount()
+        {
+            return _destinationDal.GetDestinationCount();
+        }
+
         public List<Destination> TGetListByFilter(Expression<Func<Destination, bool>> filter)
         {
             return _destinationDal.GetListByFilter(filter);

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.Repository;
 using EntityLayer.Concreate;
 using System;
@@ -11,5 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFDestinationDal : GenericRepository<Destination>, IDestinationDal
     {
+        TraversalContext context = new TraversalContext();
+        public int GetDestinationCount()
+        {
+            return context.Destinations.Count();
+        }
     }
 }
