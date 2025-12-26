@@ -17,8 +17,8 @@ namespace DataAccessLayer.Configuration
             builder.Property(x => x.FeatureID).UseIdentityColumn(1, 1);
 
             builder.Property(x => x.Title).HasColumnType("varchar").HasMaxLength(30).IsRequired();
-            builder.Property(x => x.Post1Description).HasColumnType("varchar").HasMaxLength(250).IsRequired();
-            builder.Property(x => x.Post1Image).HasColumnType("varchar").HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Description).HasColumnType("varchar").HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Image).HasColumnType("varchar").HasMaxLength(250).IsRequired();
         }
     }
 }

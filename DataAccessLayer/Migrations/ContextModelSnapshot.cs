@@ -190,37 +190,6 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureID"));
 
-                    b.Property<string>("Post1Description")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("Post1Image")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar");
-
-                    b.HasKey("FeatureID");
-
-                    b.ToTable("Features");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concreate.Feature2", b =>
-                {
-                    b.Property<int>("FeatureID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeatureID"));
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -241,7 +210,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("FeatureID");
 
-                    b.ToTable("Features2");
+                    b.ToTable("Features");
                 });
 
             modelBuilder.Entity("EntityLayer.Concreate.Guide", b =>

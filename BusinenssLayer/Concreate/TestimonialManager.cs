@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Abstract;
+﻿using BusinenssLayer.Abstract;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinenssLayer.Concreate
 {
-    public class TestimonialManager
+    public class TestimonialManager : ITestimonialService
     {
         private readonly ITestimonialDal _testimonialDal;
         public TestimonialManager(ITestimonialDal testimonialDal)
