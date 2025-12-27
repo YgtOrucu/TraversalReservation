@@ -21,6 +21,10 @@ namespace DataAccessLayer.Configuration
             builder.Property(x => x.Price).HasPrecision(8, 2);
             builder.Property(x => x.Image).HasColumnType("varchar").HasMaxLength(250).IsRequired();
             builder.Property(x => x.Description).HasColumnType("varchar").HasMaxLength(300).IsRequired();
+            builder.Property(x => x.CoverImage).HasColumnType("varchar").HasMaxLength(250).IsRequired();
+            builder.Property(x => x.Details1).HasColumnType("varchar").HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Details2).HasColumnType("varchar").HasMaxLength(500).IsRequired();
+            builder.Property(x => x.Image2).HasColumnType("varchar").HasMaxLength(250).IsRequired();
         }
     }
 }
