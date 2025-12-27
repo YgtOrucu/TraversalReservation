@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Configuration;
 using EntityLayer.Concreate;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concreate
 {
-    public class TraversalContext : DbContext
+    public class TraversalContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public DbSet<About> Abouts { get; set; }
         public DbSet<About2> Abouts2 { get; set; }
