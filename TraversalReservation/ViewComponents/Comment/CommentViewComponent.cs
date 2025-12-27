@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinenssLayer.Abstract;
+using BusinenssLayer.Concreate;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TraversalReservation.ViewComponents.Comment
 {
     public class CommentViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly ICommentService _commentService;
+
+        public CommentViewComponent()
         {
-            return View("~/Views/Shared/Components/Comment/Comment.cshtml");
+            _commentService = new CommentManager(new EFCommentDal());
+        }
+        public IViewComponentResult Invoke(int id)
+        {
+            var values = _commentService.TGetCommentsbyDestinationID(id);
+            return View("~/Views/Shared/Components/Comment/Comment.cshtml", values);
         }
     }
 }

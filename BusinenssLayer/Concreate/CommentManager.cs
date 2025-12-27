@@ -12,34 +12,39 @@ namespace BusinenssLayer.Concreate
 {
     public class CommentManager : ICommentService
     {
-        private readonly ICommentService _commentService;
-        public CommentManager(ICommentService commentService)
+        private readonly ICommentDal _commentDal;
+        public CommentManager(ICommentDal commentDal)
         {
-            _commentService = commentService;
+            _commentDal = commentDal;
         }
         public List<Comment> TGetAllList()
         {
-            return _commentService.TGetAllList();
+            return _commentDal.GetAllList();
         }
 
         public Comment TGetByID(int id)
         {
-            return _commentService.TGetByID(id);
+            return _commentDal.GetByID(id);
+        }
+
+        public List<Comment> TGetCommentsbyDestinationID(int id)
+        {
+            return _commentDal.GetCommentsbyDestinationID(id);
         }
 
         public List<Comment> TGetListByFilter(Expression<Func<Comment, bool>> filter)
         {
-            return _commentService.TGetListByFilter(filter);
+            return _commentDal.GetListByFilter(filter);
         }
 
         public void TInsert(Comment entity)
         {
-            _commentService.TInsert(entity);
+            _commentDal.Insert(entity);
         }
 
         public void TUpdate(Comment entity)
         {
-            _commentService.TUpdate(entity);
+            _commentDal.Update(entity);
         }
     }
 }

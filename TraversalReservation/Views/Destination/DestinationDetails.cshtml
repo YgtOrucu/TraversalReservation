@@ -8,7 +8,7 @@
 <section class="w3l-about-breadcrumb text-left">
     <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
         <div class="container">
-            <h2 class="title">Tur Detayları</h2>   
+            <h2 class="title">Tur Detayları</h2>
             <ul class="breadcrumbs-custom-path mt-2">
                 <li><a href="/Users/HomePage">AnaSayfa</a></li>
                 <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Yorumlar </li>
@@ -19,7 +19,6 @@
 <!-- //about breadcrumb -->
 <div class="py-5 w3l-homeblock1 text-center">
     <div class="container mt-md-3">
-       
     </div>
 </div>
 <section class="blog-post-main w3l-homeblock1">
@@ -33,7 +32,7 @@
             </div>
             <div class="single-post-content">
                 <p class="alphabet mb-4">
-                    <span class="big-letter">@Model.Details1.Substring(0,1)</span>@Model.Details1.Substring(1)
+                    <span class="big-letter">@Model.Details1.Substring(0, 1)</span>@Model.Details1.Substring(1)
                 </p>
                 <div class="sing-post-thumb mb-5 row pt-3">
                     <div class="col-sm-6">
@@ -44,9 +43,9 @@
                     </div>
                 </div>
                 <p class="mb-4">
-                   @Model.Details2
+                    @Model.Details2
                 </p>
-               
+
                 <!--//author-card-->
                 <div class="author-card mt-5">
                     <div class="row align-items-center">
@@ -103,10 +102,9 @@
                     </div>
                 </div>
                 <!--//author-card-->
+                @await Component.InvokeAsync("Comment", new { id = Model.DestinationID })
 
-                @await Component.InvokeAsync("Comment")
-
-                @await Component.InvokeAsync("AddComment")
+                @await Component.InvokeAsync("AddComment", new { id = Model.DestinationID })
             </div>
         </div>
     </div>
