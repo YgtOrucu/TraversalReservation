@@ -13,7 +13,7 @@ namespace TraversalReservation.Controllers
         private readonly SignInManager<AppUser> _signInManager;
 
 
-        public LoginController(UserManager<AppUser> user,SignInManager<AppUser> signIn)
+        public LoginController(UserManager<AppUser> user, SignInManager<AppUser> signIn)
         {
             _usermanager = user;
             _signInManager = signIn;
@@ -77,7 +77,7 @@ namespace TraversalReservation.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("HomePage", "Users");
+                return RedirectToAction("MembersProfile", "Profile", new { area = "Member" });
             }
             else
             {
