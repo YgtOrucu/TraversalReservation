@@ -38,7 +38,8 @@ namespace TraversalReservation.Controllers
                 Name = p.Name,
                 Surname = p.Surname,
                 Email = p.Mail,
-                UserName = p.Username
+                UserName = p.Username,
+                PhoneNumber = p.Phone
             };
 
             var result = await _usermanager.CreateAsync(appUser, p.Password);

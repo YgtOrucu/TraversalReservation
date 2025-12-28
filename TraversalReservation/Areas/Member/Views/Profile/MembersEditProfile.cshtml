@@ -1,0 +1,83 @@
+﻿@model TraversalReservation.Areas.Member.Models.UserEditViewModal
+@{
+    ViewData["Title"] = "MembersEditProfile";
+    Layout = "~/Views/Shared/_UsersLayout.cshtml";
+}
+
+<style>
+    .list-group li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .text-dark {
+        font-size: 15px;
+    }
+</style>
+
+<form action="/Member/Profile/MembersProfile" method="post" enctype="multipart/form-data">
+
+    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/soft-ui-dashboard/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+        <span class="mask bg-gradient-primary opacity-6"></span>
+    </div>
+    <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div class="row gx-4">
+            <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                    <i class="fa fa-user-edit text-secondary"></i>
+                </div>
+            </div>
+            <div class="col-auto my-auto">
+                <div class="h-100">
+                    <h5 class="mb-1" style="display:inline-flex">
+                        Edit Profile
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <hr class="horizontal gray-light my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.Name, "Name", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Surname, "Surname", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Username, "Username", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Username, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Mail, "Mail", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Mail, new { @class = "form-control", @style = "width:50%", @type = "email" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Password, "Password", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @style = "width:50%", @type = "password" })
+
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.ConfirmPassword, "ConfirmPassword", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "form-control", @style = "width:50%", @type = "password" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.PhoneNumber, "Phone", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", @style = "width:50%", @type = "tel" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Image, "Image", new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Image, new { @class = "form-control", @style = "width:50%", @type = "file" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            <div></div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+

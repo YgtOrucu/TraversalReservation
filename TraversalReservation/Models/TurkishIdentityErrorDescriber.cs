@@ -28,5 +28,29 @@ public class TurkishIdentityErrorDescriber : IdentityErrorDescriber
         {
             Code = nameof(PasswordRequiresDigit),
             Description = "Şifre en az bir rakam içermelidir."
-        };  
+        };
+
+    public override IdentityError DuplicateUserName(string userName)
+    => new IdentityError
+    {
+        Code = nameof(DuplicateUserName),
+        Description = $"'{userName}' kullanıcı adı zaten kullanılıyor."
+    };
+
+    public override IdentityError DuplicateEmail(string email)
+    => new IdentityError
+    {
+        Code = nameof(DuplicateEmail),
+        Description = $"'{email}' e-posta adresi zaten kayıtlı."
+    };
+
+    public override IdentityError InvalidUserName(string userName)
+    => new IdentityError
+    {
+        Code = nameof(InvalidUserName),
+        Description =
+            $"'{userName}' kullanıcı adı geçersiz." +
+            "Türkçe karakter veya özel karakter kullanılamaz."
+    };
+
 }

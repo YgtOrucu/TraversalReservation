@@ -9,16 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TraversalContext>();
 
-builder.Services.AddIdentity<AppUser, AppRole>(config =>
-{
-    config.Password.RequiredLength = 5;
-    config.Password.RequireNonAlphanumeric = false;
-    config.Password.RequireLowercase = true;
-    config.Password.RequireUppercase = true;
-    config.Password.RequireDigit = true;
-})
-.AddEntityFrameworkStores<TraversalContext>()
-.AddErrorDescriber<TurkishIdentityErrorDescriber>();
+builder.Services
+    .AddIdentity<AppUser, AppRole>(config =>
+    {
+        config.Password.RequiredLength = 5;
+        config.Password.RequireNonAlphanumeric = false;
+        config.Password.RequireLowercase = true;
+        config.Password.RequireUppercase = true;
+        config.Password.RequireDigit = true;
+        config.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<TraversalContext>()
+    .AddErrorDescriber<TurkishIdentityErrorDescriber>();
+
 
 // optional global auth filter
 builder.Services.AddMvc(config =>

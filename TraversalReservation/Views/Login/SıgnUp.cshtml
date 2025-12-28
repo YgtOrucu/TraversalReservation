@@ -68,11 +68,17 @@
                 </div>
                 @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "error-text" })
 
-                <div class="form-holder">
-                    <span class="lnr lnr-phone-handset"></span>
+                 <div class="form-holder">
+                    <span class="lnr lnr-user"></span>
                     @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Username" })
                 </div>
                 @Html.ValidationMessageFor(x => x.Username, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-phone-handset"></span>
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", placeholder = "Phone" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "error-text" })
 
                 <div class="form-holder">
                     <span class="lnr lnr-lock"></span>
