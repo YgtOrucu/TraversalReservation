@@ -1,4 +1,4 @@
-﻿
+﻿@model TraversalReservation.Models.UserRegisterViewModal
 @{
     Layout = null;
 }
@@ -6,58 +6,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Travelsal Register</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Travelsal Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- LINEARICONS -->
-	<link rel="stylesheet" href="/colorlib-regform-26/fonts/linearicons/style.css">
+    <!-- LINEARICONS -->
+    <link rel="stylesheet" href="/colorlib-regform-26/fonts/linearicons/style.css">
 
-	<!-- STYLE CSS -->
-	<link rel="stylesheet" href="/colorlib-regform-26/css/style.css">
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="/colorlib-regform-26/css/style.css">
+    <!-- CUSTOM VALIDATION STYLE -->
+    <style>
+        .error-text {
+            color: #ff4d4f;
+            font-size: 12px;
+            margin-left: 42px;
+            margin-top: -8px;
+            display: block;
+        }
+
+        .validation-summary-errors {
+            background: #fff1f0;
+            border: 1px solid #ffccc7;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            color: #a8071a;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
 
-	<div class="wrapper">
-		<div class="inner">
-			<img src="/colorlib-regform-26/images/image-1.png" alt="" class="image-1">
-			<form action="/Login/SıngUp" method="post">
-				<h3>New Account?</h3>
-				<div class="form-holder">
-					<span class="lnr lnr-user"></span>
-					<input type="text" class="form-control" placeholder="Name" name="Name">
-				</div>
-				<div class="form-holder">
-					<span class="lnr lnr-user"></span>
-					<input type="text" class="form-control" placeholder="Surname" name="Surname">
-				</div>
-				<div class="form-holder">
-					<span class="lnr lnr-envelope"></span>
-					<input type="email" class="form-control" placeholder="Mail" name="Mail">
-				</div>
-				<div class="form-holder">
-					<span class="lnr lnr-phone-handset"></span>
-					<input type="text" class="form-control" placeholder="Username" name="Username">
-				</div>
-				<div class="form-holder">
-					<span class="lnr lnr-lock"></span>
-					<input type="password" class="form-control" placeholder="Password" name="Password">
-				</div>
-				<div class="form-holder">
-					<span class="lnr lnr-lock"></span>
-					<input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword">
-				</div>
-				<button>
-					<span>Register</span>
-				</button>
-			</form>
-			<img src="/colorlib-regform-26/images/image-2.png" alt="" class="image-2">
-		</div>
+    <div class="wrapper">
+        <div class="inner">
+            <img src="/colorlib-regform-26/images/image-1.png" alt="" class="image-1">
 
-	</div>
 
-	<script src="/colorlib-regform-26/js/jquery-3.3.1.min.js"></script>
-	<script src="/colorlib-regform-26/js/main.js"></script>
+            @using (Html.BeginForm("SıngUp", "Login", FormMethod.Post))
+            {
+                <h3>New Account?</h3>
+
+                @Html.ValidationSummary(true, "", new { @class = "validation-summary-errors" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-user"></span>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Name" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-user"></span>
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", placeholder = "Surname" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Surname, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-envelope"></span>
+                    @Html.TextBoxFor(x => x.Mail, new { @class = "form-control", placeholder = "Mail", type = "email" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-phone-handset"></span>
+                    @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Username" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Username, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-lock"></span>
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "error-text" })
+
+                <div class="form-holder">
+                    <span class="lnr lnr-lock"></span>
+                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                </div>
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "error-text" })
+
+                <button type="submit">
+                    <span>Register</span>
+                </button>
+            }
+
+            <img src="/colorlib-regform-26/images/image-2.png" alt="" class="image-2">
+        </div>
+
+    </div>
+
+    <script src="/colorlib-regform-26/js/jquery-3.3.1.min.js"></script>
+    <script src="/colorlib-regform-26/js/main.js"></script>
 </body>
 </html>
