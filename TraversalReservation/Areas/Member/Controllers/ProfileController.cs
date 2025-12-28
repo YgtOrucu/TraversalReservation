@@ -4,8 +4,9 @@ namespace TraversalReservation.Areas.Member.Controllers
 {
     public class ProfileController : Controller
     {
-        public IActionResult Index()
+        public IActionResult MembersProfile()
         {
+
             return View();
         }
     }

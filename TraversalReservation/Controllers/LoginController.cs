@@ -10,22 +10,25 @@ namespace TraversalReservation.Controllers
     public class LoginController : Controller
     {
         private readonly UserManager<AppUser> _usermanager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public LoginController(UserManager<AppUser> user)
+
+        public LoginController(UserManager<AppUser> user,SignInManager<AppUser> signIn)
         {
             _usermanager = user;
+            _signInManager = signIn;
         }
 
         #region SınUp
 
         [HttpGet]
-        public IActionResult SıngUp()
+        public IActionResult SıgnUp()
         {
             return View();
         }
         [HttpPost]
 
-        public async Task<IActionResult> SıngUp(UserRegisterViewModal p)
+        public async Task<IActionResult> SıgnUp(UserRegisterViewModal p)
         {
             if (!ModelState.IsValid)
                 return View(p);
@@ -42,7 +45,7 @@ namespace TraversalReservation.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("SıngIn");
+                return RedirectToAction("SıgnIn");
             }
 
             foreach (var item in result.Errors)
@@ -56,10 +59,31 @@ namespace TraversalReservation.Controllers
         #endregion
 
 
+        #region SıgnIn
+
         [HttpGet]
-        public IActionResult SıngIn()
+        public IActionResult SıgnIn()
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SıgnIn(UserSıgnInViewModal p)
+        {
+            if (!ModelState.IsValid)
+                return View(p);
+
+            var result = await _signInManager.PasswordSignInAsync(p.Username, p.Password, false, true);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("HomePage", "Users");
+            }
+            else
+            {
+                return RedirectToAction("SıgnIn");
+            }
+        }
+        #endregion
     }
 }

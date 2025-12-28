@@ -17,5 +17,10 @@ namespace DataAccessLayer.EntityFramework
         {
             return context.Destinations.Count();
         }
+
+        public List<Destination> ListingActiveRoutesForMembers()
+        {
+            return context.Destinations.Where(x => x.Status == true).ToList();
+        }
     }
 }

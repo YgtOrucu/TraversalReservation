@@ -29,10 +29,6 @@ namespace BusinenssLayer.Concreate
             return _destinationDal.GetByID(id);
         }
 
-        public int TGetDestinationCount()
-        {
-            return _destinationDal.GetDestinationCount();
-        }
 
         public List<Destination> TGetListByFilter(Expression<Func<Destination, bool>> filter)
         {
@@ -44,9 +40,20 @@ namespace BusinenssLayer.Concreate
             _destinationDal.Insert(entity);
         }
 
+
         public void TUpdate(Destination entity)
         {
             _destinationDal.Update(entity);
+        }
+
+        public int TGetDestinationCount()
+        {
+            return _destinationDal.GetDestinationCount();
+        }
+
+        public List<Destination> TListingActiveRoutesForMembers()
+        {
+            return _destinationDal.ListingActiveRoutesForMembers();
         }
     }
 }

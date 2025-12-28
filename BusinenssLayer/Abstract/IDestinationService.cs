@@ -10,5 +10,7 @@ namespace BusinenssLayer.Abstract
     public interface IDestinationService : IGenericService<Destination>
     {
         int TGetDestinationCount();
+        List<Destination> TListingActiveRoutesForMembers();
+
     }
 }

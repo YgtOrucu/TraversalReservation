@@ -10,5 +10,7 @@ namespace DataAccessLayer.Abstract
     public interface IDestinationDal : IGenericDal<Destination>
     {
         int GetDestinationCount();
+
+        List<Destination> ListingActiveRoutesForMembers();
     }
 }
