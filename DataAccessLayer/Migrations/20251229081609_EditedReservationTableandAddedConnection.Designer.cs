@@ -4,6 +4,7 @@ using DataAccessLayer.Concreate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(TraversalContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251229081609_EditedReservationTableandAddedConnection")]
+    partial class EditedReservationTableandAddedConnection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -463,6 +466,11 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(250)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasMaxLength(40)
                         .HasColumnType("varchar");
 
                     b.Property<int>("DestinationID")

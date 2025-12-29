@@ -4,6 +4,7 @@ using DataAccessLayer.Concreate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(TraversalContext))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251229065054_AddedReservationTable")]
+    partial class AddedReservationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -465,24 +468,22 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("varchar");
 
-                    b.Property<int>("DestinationID")
-                        .HasColumnType("int");
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("varchar");
 
                     b.Property<string>("PersonCount")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("varchar");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.HasKey("ReservationID");
 
                     b.HasIndex("AppUserID");
-
-                    b.HasIndex("DestinationID");
 
                     b.ToTable("Reservation", (string)null);
                 });
@@ -663,15 +664,7 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EntityLayer.Concreate.Destination", "Destinations")
-                        .WithMany("Reservations")
-                        .HasForeignKey("DestinationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("AppUser");
-
-                    b.Navigation("Destinations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -733,8 +726,6 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concreate.Destination", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

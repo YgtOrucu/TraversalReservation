@@ -40,15 +40,14 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Login}/{action=SýgnIn}/{id?}");
-
 
 app.MapControllerRoute(
   name: "areas",
   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 );
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Login}/{action=SýgnIn}/{id?}");
 
 app.Run();
