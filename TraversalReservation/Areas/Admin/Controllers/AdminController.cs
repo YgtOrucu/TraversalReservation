@@ -59,5 +59,14 @@ namespace TraversalReservation.Areas.Admin.Controllers
 
         #endregion
 
+        #region DashboardOperation
+
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
+        #endregion
+
     }
 }

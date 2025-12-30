@@ -1,7 +1,8 @@
-using DataAccessLayer.Concreate;
+﻿using DataAccessLayer.Concreate;
 using EntityLayer.Concreate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using BusinenssLayer.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services
     .AddEntityFrameworkStores<TraversalContext>()
     .AddErrorDescriber<TurkishIdentityErrorDescriber>();
 
+
+builder.Services.AddBusinessLayer();
 
 // optional global auth filter
 builder.Services.AddMvc(config =>
@@ -48,6 +51,6 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=S�gnIn}/{id?}");
+    pattern: "{controller=Login}/{action=SıgnIn}/{id?}");
 
 app.Run();
