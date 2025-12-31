@@ -13,15 +13,18 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFReservationDal : GenericRepository<Reservation>, IReservationDal
     {
-        TraversalContext c = new TraversalContext();
+        public EFReservationDal(TraversalContext traversalContext) : base(traversalContext)
+        {
+        }
+
         public List<Reservation> GetActiveReservation(int id)
         {
-            return c.Reservations.Include(z=>z.Destinations).Where(x => x.AppUserID == id && x.Status == "Onaylandı").OrderByDescending(y => y.Date).ToList();   
+            return _traversalContext.Reservations.Include(z=>z.Destinations).Where(x => x.AppUserID == id && x.Status == "Onaylandı").OrderByDescending(y => y.Date).ToList();   
         }
 
         public List<Reservation> GetOldReservation(int id)
         {
-            return c.Reservations.Include(z => z.Destinations).Where(x => x.AppUserID == id && x.Status == "Gerçekleşti").OrderByDescending(y => y.Date).ToList();
+            return _traversalContext.Reservations.Include(z => z.Destinations).Where(x => x.AppUserID == id && x.Status == "Gerçekleşti").OrderByDescending(y => y.Date).ToList();
         }
     }
 }

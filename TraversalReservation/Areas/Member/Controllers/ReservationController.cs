@@ -1,5 +1,6 @@
 ﻿using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concreate;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,10 @@ namespace TraversalReservation.Areas.Member.Controllers
         private readonly IReservationService _reservationService;
         private readonly UserManager<AppUser> _userManager;
 
-        public ReservationController(UserManager<AppUser> userManager)
+        public ReservationController(UserManager<AppUser> userManager,IDestinationService destinationService)
         {
-            _destinationService = new DestinationManager(new EFDestinationDal());
-            _reservationService = new ReservationManager(new EFReservationDal());
+            _destinationService = destinationService;
+            _reservationService = new ReservationManager(new EFReservationDal(new TraversalContext()));
             _userManager = userManager;
         }
 

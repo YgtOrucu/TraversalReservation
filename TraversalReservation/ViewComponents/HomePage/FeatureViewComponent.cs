@@ -12,7 +12,7 @@ namespace TraversalReservation.ViewComponents.HomePage
 
         public FeatureViewComponent()
         {
-            _featureService = new FeatureManager(new EFFeatureDal());
+            _featureService = new FeatureManager(new EFFeatureDal(new TraversalContext()));
         }
         public IViewComponentResult Invoke()
         {

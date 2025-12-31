@@ -32,6 +32,11 @@ namespace BusinenssLayer.Concreate
             return _commentDal.GetCommentsbyDestinationID(id);
         }
 
+        public List<Comment> TGetCommentsForAdminPage()
+        {
+            return _commentDal.GetCommentsForAdminPage();
+        }
+
         public List<Comment> TGetListByFilter(Expression<Func<Comment, bool>> filter)
         {
             return _commentDal.GetListByFilter(filter);

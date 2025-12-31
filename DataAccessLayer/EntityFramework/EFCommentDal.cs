@@ -2,6 +2,7 @@
 using DataAccessLayer.Concreate;
 using DataAccessLayer.Repository;
 using EntityLayer.Concreate;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,18 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFCommentDal : GenericRepository<Comment>, ICommentDal
     {
-        TraversalContext c = new TraversalContext();
+        public EFCommentDal(TraversalContext traversalContext) : base(traversalContext)
+        {
+        }
+
         public List<Comment> GetCommentsbyDestinationID(int id)
         {
-            return c.Comments.Where(x => x.DestinationID == id).ToList();
+            return _traversalContext.Comments.Where(x => x.DestinationID == id).ToList();
+        }
+
+        public List<Comment> GetCommentsForAdminPage()
+        {
+            return _traversalContext.Comments.Include(x => x.Destination).ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ namespace TraversalReservation.ViewComponents.HomePage
 
         public TestimonialsViewComponent()
         {
-            _testimonialService = new TestimonialManager(new EFTestimonialDal());
+            _testimonialService = new TestimonialManager(new EFTestimonialDal(new TraversalContext()));
         }
         public IViewComponentResult Invoke()
         {

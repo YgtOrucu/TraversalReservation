@@ -10,10 +10,11 @@ namespace TraversalReservation.Controllers
     {
         private readonly ICommentService _commentService;
 
-        public CommentController()
+        public CommentController(ICommentService commentService)
         {
-            _commentService = new CommentManager(new EFCommentDal());
+            _commentService = commentService;
         }
+
         [HttpPost]
         public IActionResult AddComment(Comment c)
         {

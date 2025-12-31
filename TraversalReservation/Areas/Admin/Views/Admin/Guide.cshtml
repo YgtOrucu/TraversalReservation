@@ -1,0 +1,209 @@
+﻿@model List<Guide>
+@{
+    ViewData["Title"] = "Guide";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+
+    /* Wrapper spacing */
+    .members-wrapper .col-12 {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Member Card */
+    .member-card {
+        position: relative;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+        .member-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+        }
+
+    /* Avatar */
+    .member-avatar {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #f1f1f1;
+    }
+
+    /* Text */
+    .member-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .member-info p,
+    .member-info li {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+
+    .member-email {
+        word-break: break-all;
+    }
+
+    /* Dropdown Actions */
+    .member-actions {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 10;
+    }
+
+        .member-actions .btn {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .member-actions .dropdown-menu {
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+    /* Social Icons */
+    .social-icon {
+        font-size: 1.1rem;
+        color: #6c757d;
+        transition: all 0.2s ease;
+    }
+
+        .social-icon:hover {
+            transform: scale(1.15);
+        }
+
+        .social-icon.twitter:hover {
+            color: #1DA1F2;
+        }
+
+        .social-icon.instagram:hover {
+            color: #E1306C;
+        }
+
+    /* Status Badge */
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+        .status-badge.active {
+            background-color: #e6f7f0;
+            color: #198754;
+        }
+
+        .status-badge.passive {
+            background-color: #fdecea;
+            color: #dc3545;
+        }
+
+
+</style>
+
+
+<div class="card members-wrapper">
+    <h5 class="card-header">Members</h5>
+
+    <div class="card-body pb-0">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                var description = item.Description.Split(". ");
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="card member-card bg-white">
+
+                        <!-- Actions -->
+                        <div class="dropdown member-actions">
+                            <button type="button"
+                                    class="btn btn-light btn-sm rounded-circle shadow-sm dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center"
+                                       href="@Url.Action("EditGuide", "Admin", new { Area = "Admin", id = item.GuideID })">
+                                        <i class="bx bx-edit-alt me-2"></i>
+                                        Edit
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+
+                                <img src="@(item.Image)"
+                                     alt="avatar"
+                                     class="member-avatar me-3" />
+
+                                <div class="member-info">
+                                    <h6 class="mb-0 text-sm mb-2">@(item.Name)</h6>
+                                    <p class="text-muted mb-2">
+                                        <strong>Kullanıcı Adı:</strong> @(description[0])
+                                    </p>
+                                    <p class="text-muted mb-2">
+                                        <strong>Tecrübe:</strong> @(description[1])
+                                    </p>
+
+                                    <!-- Social + Status -->
+                                    <div class="d-flex align-items-center justify-content-between mt-2">
+
+                                        <!-- Social Media -->
+                                        <div class="d-flex gap-3">
+                                            <a href="@(item.TwitterUrl)"
+                                               target="_blank"
+                                               class="social-icon twitter"
+                                               title="Twitter">
+                                                <i class="fab fa-twitter"></i>
+                                            </a>
+
+                                            <a href="@(item.InstagramUrl)"
+                                               target="_blank"
+                                               class="social-icon instagram"
+                                               title="Instagram">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                        </div>
+
+                                        <!-- Status Badge -->
+                                        @if (item.Status)
+                                        {
+                                            <span class="status-badge active">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge passive">Passive</span>
+                                        }
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <a href="@Url.Action("AddGuide", "Admin", new { Area = "Admin" })" class="btn btn-primary btn-sm" style="margin: 2rem 1rem 1rem 0;width: 80px;float: right;">Add</a>
+    </div>
+</div>
+
+
+

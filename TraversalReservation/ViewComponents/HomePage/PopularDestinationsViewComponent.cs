@@ -9,9 +9,9 @@ namespace TraversalReservation.ViewComponents.HomePage
     public class PopularDestinationsViewComponent : ViewComponent
     {
         private readonly IDestinationService _destinationService;
-        public PopularDestinationsViewComponent()
+        public PopularDestinationsViewComponent(IDestinationService destinationService)
         {
-            _destinationService = new DestinationManager(new EFDestinationDal());
+            _destinationService = destinationService;
         }
 
         public IViewComponentResult Invoke()

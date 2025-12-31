@@ -12,13 +12,14 @@ namespace DataAccessLayer.Repository
 {
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
-        private readonly TraversalContext context = new TraversalContext();
+        protected readonly TraversalContext _traversalContext;
 
         private readonly DbSet<T> _object;
 
-        public GenericRepository()
+        public GenericRepository(TraversalContext traversalContext)
         {
-            _object = context.Set<T>();
+            _traversalContext = traversalContext;
+            _object = _traversalContext.Set<T>();
         }
 
         public List<T> GetAllList()
@@ -39,14 +40,14 @@ namespace DataAccessLayer.Repository
         public void Insert(T entity)
         {
             _object.Add(entity);
-            context.SaveChanges();
+            _traversalContext.SaveChanges();
         }
 
         public void Update(T entity)
         {
-            var updateded = context.Entry(entity);
+            var updateded = _traversalContext.Entry(entity);
             updateded.State = EntityState.Modified;
-            context.SaveChanges();
+            _traversalContext.SaveChanges();
         }
     }
 }

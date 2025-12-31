@@ -11,13 +11,21 @@ namespace BusinenssLayer.DependencyInjection
     {
         public static IServiceCollection AddBusinessLayer(this IServiceCollection services)
         {
+            //Destination
             services.AddScoped<IDestinationService, DestinationManager>();
             services.AddScoped<IDestinationDal, EFDestinationDal>();
 
-            // ileride:
-            // services.AddScoped<IUserService, UserManager>();
-            // services.AddScoped<IUserDal, EFUserDal>();
+            //Comments
+            services.AddScoped<ICommentService, CommentManager> ();
+            services.AddScoped<ICommentDal, EFCommentDal>();
 
+            //Reservation
+            services.AddScoped<IReservationService, ReservationManager>();
+            services.AddScoped<IReservationDal, EFReservationDal>();
+
+            //Guide
+            services.AddScoped<IGuideService, GuideManager>();
+            services.AddScoped<IGuideDal, EFGuideDal>();
             return services;
         }
     }

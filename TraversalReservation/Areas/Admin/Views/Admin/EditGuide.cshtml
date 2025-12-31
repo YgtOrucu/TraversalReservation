@@ -1,0 +1,70 @@
+﻿@model EntityLayer.Concreate.Guide
+@{
+    ViewData["Title"] = "EditGuide";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .list-group li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .text-dark {
+        font-size: 15px;
+    }
+</style>
+
+<form action="@Url.Action("UpdateGuide","Admin", new { Area = "Admin" })" method="post">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <h5>Edit Guide</h5>
+                    <hr class="horizontal gray-light my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.HiddenFor(x => x.GuideID)
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.Name, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Description, new { @class = "text-dark" }) @Html.TextAreaFor(x => x.Description, 2, 0, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Image, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Image, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.TwitterUrl, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.TwitterUrl, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.InstagramUrl, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.InstagramUrl, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Status, new { @class = "text-dark" })
+                            <div style="display: flex;column-gap: 20px;">
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(x => x.Status, true, new { @class = "form-check-input" })
+                                    <label class="form-check-label" for="durumAktif">Aktif</label>
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(x => x.Status, false, new { @class = "form-check-input" })
+                                    <label class="form-check-label" for="durumPasif">Pasif</label>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            <div></div>
+                            <button type="submit" class="btn btn-primary">Update Guide</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

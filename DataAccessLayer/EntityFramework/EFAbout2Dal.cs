@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.Repository;
 using EntityLayer.Concreate;
 using System;
@@ -11,5 +12,8 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFAbout2Dal : GenericRepository<About2>, IAbout2Dal
     {
+        public EFAbout2Dal(TraversalContext traversalContext) : base(traversalContext)
+        {
+        }
     }
 }

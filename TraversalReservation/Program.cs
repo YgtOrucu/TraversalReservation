@@ -36,9 +36,9 @@ builder.Services.AddMvc(config =>
 var app = builder.Build();
 
 // middleware ordering: routing before auth
+app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404", "?code={0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

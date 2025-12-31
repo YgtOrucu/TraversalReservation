@@ -12,10 +12,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFGuideDal : GenericRepository<Guide>, IGuideDal
     {
-        TraversalContext context = new TraversalContext();
+        public EFGuideDal(TraversalContext traversalContext) : base(traversalContext) { }
         public int GetGuideCount()
         {
-            return context.Guides.Count();
+            return _traversalContext.Guides.Count();
         }
     }
 }

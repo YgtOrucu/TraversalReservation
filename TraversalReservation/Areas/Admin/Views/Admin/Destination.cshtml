@@ -54,6 +54,7 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="@Url.Action("EditDestination", "Admin", new { Area = "Admin", id = item.DestinationID })"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="@Url.Action("DestinationDetails", "Destination", new { Area = "", id = item.DestinationID })"><i class="bx bx-edit-alt me-1"></i> View WebSite</a>
                                 </div>
                             </div>
                         </td>

@@ -1,6 +1,7 @@
 ﻿using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace TraversalReservation.ViewComponents.Comment
 
         public CommentViewComponent()
         {
-            _commentService = new CommentManager(new EFCommentDal());
+            _commentService = new CommentManager(new EFCommentDal(new TraversalContext()));
         }
         public IViewComponentResult Invoke(int id)
         {

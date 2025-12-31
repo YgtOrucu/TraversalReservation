@@ -1,5 +1,6 @@
 ﻿using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
+using DataAccessLayer.Concreate;
 using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ namespace TraversalReservation.ViewComponents.HomePage
 
         public SubAboutViewComponent()
         {
-            _subAboutService = new SubAboutManager(new EFSubAboutDal());
+            _subAboutService = new SubAboutManager(new EFSubAboutDal(new TraversalContext()));
         }
         public IViewComponentResult Invoke()
         {

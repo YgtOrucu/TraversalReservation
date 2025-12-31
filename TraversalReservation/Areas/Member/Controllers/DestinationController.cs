@@ -13,9 +13,9 @@ namespace TraversalReservation.Areas.Member.Controllers
 
         public readonly IDestinationService _destinationService;
 
-        public DestinationController()
+        public DestinationController(IDestinationService destinationService)
         {
-            _destinationService = new DestinationManager(new EFDestinationDal());
+            _destinationService = destinationService;
         }
 
         public IActionResult MembersDestination()

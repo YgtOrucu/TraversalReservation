@@ -52,7 +52,7 @@
 
         <!-- Comments -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="@Url.Action("Comments", "Admin", new { Area = "Admin" })" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-comment-detail"></i>
                 <div data-i18n="Comments">Comments</div>
             </a>
@@ -60,9 +60,17 @@
 
         <!-- Guests / Members -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="@Url.Action("Members", "Admin", new { Area = "Admin" })" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Users">Guests / Members</div>
+            </a>
+        </li>
+
+        <!-- Guide -->
+        <li class="menu-item">
+            <a href="@Url.Action("Guide", "Admin", new { Area = "Admin" })" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-group"></i>
+                <div data-i18n="Users">Guides</div>
             </a>
         </li>
 

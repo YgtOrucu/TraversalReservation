@@ -8,15 +8,13 @@ namespace TraversalReservation.ViewComponents.HomePage
 {
     public class StatsViewComponent : ViewComponent
     {
-        TraversalContext context = new TraversalContext();
-
         private readonly IDestinationService _destinationService;
         private readonly IGuideService _guideService;
 
-        public StatsViewComponent()
+        public StatsViewComponent(IDestinationService destinationService)
         {
-            _destinationService = new DestinationManager(new EFDestinationDal());
-            _guideService = new GuideManager(new EFGuideDal());
+            _destinationService = destinationService;
+            _guideService = new GuideManager(new EFGuideDal(new TraversalContext()));
         }
 
         public IViewComponentResult Invoke()

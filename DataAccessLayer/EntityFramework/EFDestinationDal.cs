@@ -12,15 +12,15 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFDestinationDal : GenericRepository<Destination>, IDestinationDal
     {
-        TraversalContext context = new TraversalContext();
+        public EFDestinationDal(TraversalContext traversalContext) : base(traversalContext) { }
         public int GetDestinationCount()
         {
-            return context.Destinations.Count();
+            return _traversalContext.Destinations.Count();
         }
 
         public List<Destination> ListingActiveRoutesForMembers()
         {
-            return context.Destinations.Where(x => x.Status == true).ToList();
+            return _traversalContext.Destinations.Where(x => x.Status == true).ToList();
         }
     }
 }
