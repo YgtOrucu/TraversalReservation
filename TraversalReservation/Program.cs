@@ -1,12 +1,32 @@
-﻿using DataAccessLayer.Concreate;
+﻿using BusinenssLayer.DependencyInjection;
+using DataAccessLayer.Concreate;
 using EntityLayer.Concreate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using BusinenssLayer.DependencyInjection;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+// 🔥 SERILOG CONFIG
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .WriteTo.File(
+        "Logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        fileSizeLimitBytes: 10_000_000, // 10 MB
+        rollOnFileSizeLimit: true, //10 mb aşarsa yeni kayıt aç
+        retainedFileCountLimit: 7 //7 Gün Log tutar sonra esklileri silp ilerler
+    )
+    .CreateLogger();
+
+// 🔥 Serilog'u host'a bağla
+builder.Host.UseSerilog();
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TraversalContext>();
 

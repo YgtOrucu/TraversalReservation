@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TraversalReservation.Models;
 
 namespace TraversalReservation.Controllers
@@ -11,12 +12,13 @@ namespace TraversalReservation.Controllers
     {
         private readonly UserManager<AppUser> _usermanager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ILogger<LoginController> _logger;
 
-
-        public LoginController(UserManager<AppUser> user, SignInManager<AppUser> signIn)
+        public LoginController(UserManager<AppUser> user, SignInManager<AppUser> signIn, ILogger<LoginController> logger)
         {
             _usermanager = user;
             _signInManager = signIn;
+            _logger = logger;
         }
 
         #region SınUp
@@ -24,12 +26,15 @@ namespace TraversalReservation.Controllers
         [HttpGet]
         public IActionResult SıgnUp()
         {
+            _logger.LogInformation($"SıgnUp Sayfası Çağırıldı");
             return View();
         }
         [HttpPost]
 
         public async Task<IActionResult> SıgnUp(UserRegisterViewModal p)
         {
+            var datetime = DateTime.Now.ToShortDateString();
+
             if (!ModelState.IsValid)
                 return View(p);
 
@@ -46,11 +51,13 @@ namespace TraversalReservation.Controllers
 
             if (result.Succeeded)
             {
+                _logger.LogInformation($"{datetime} Kullanıcı Girişi Başlarılı");
                 return RedirectToAction("SıgnIn");
             }
 
             foreach (var item in result.Errors)
             {
+                _logger.LogError($"başarısız");
                 ModelState.AddModelError("", item.Description);
             }
 
