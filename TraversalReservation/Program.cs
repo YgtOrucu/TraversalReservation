@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-
 // 🔥 SERILOG CONFIG
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()

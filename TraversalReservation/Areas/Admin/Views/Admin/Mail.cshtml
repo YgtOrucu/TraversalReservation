@@ -1,0 +1,50 @@
+﻿@model TraversalReservation.Models.MailRequest
+@{
+    ViewData["Title"] = "Mail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .list-group li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .text-dark {
+        font-size: 15px;
+    }
+</style>
+
+<form action="@Url.Action("Mail","Admin", new { Area = "Admin" })" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <h5>Add Route</h5>
+                    <hr class="horizontal gray-light my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.ReceiveMail, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.ReceiveMail, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.Subject, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.Description, new { @class = "text-dark" }) @Html.TextAreaFor(x => x.Description, 4, 0, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            <div></div>
+                            <button type="submit" class="btn btn-primary">Gönder</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
