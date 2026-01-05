@@ -1,0 +1,90 @@
+﻿@model List<ContactUs>
+@{
+    ViewData["Title"] = "ContactUs";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    /* Status Badge */
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+        .status-badge.active {
+            background-color: #e6f7f0;
+            color: #198754;
+        }
+
+        .status-badge.passive {
+            background-color: #fdecea;
+            color: #dc3545;
+        }
+
+</style>
+
+<!-- Basic Bootstrap Table -->
+<div class="card">
+    <h5 class="card-header">@ViewData["Title"]</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gönderen</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mail</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Konu</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Açıklama</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tarih</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Durum</th>
+                    <th class="text-secondary opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.Name)</p>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.Mail)</p>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.Subject.Length < 10 ? item.Subject : item.Subject.Substring(0, 10) + "...")</p>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.MessageBody.Length < 20 ? item.MessageBody : item.MessageBody.Substring(0, 20) + "...")</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-secondary text-xs font-weight-bold">@(item.MessageDate.ToString("dd/MM/yyyy"))</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            @if (item.Status)
+                            {
+                                <span class="status-badge active">Active</span>
+                            }
+                            else
+                            {
+                                <span class="status-badge passive">Passive</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("EditContactUs", "Admin", new { Area = "Admin", id = item.ContactUsID })"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="@Url.Action("DeleteContactUs", "Admin", new { Area = "Admin", id = item.ContactUsID })"><i class="bx bx-edit-alt me-1"></i> Delete</a>
+
+                                </div>                             
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--/ Basic Bootstrap Table -->

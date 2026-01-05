@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using TraversalReservation.Areas.Admin.Models;
 using TraversalReservation.Models;
 
 namespace TraversalReservation.Areas.Admin.Controllers
@@ -22,6 +23,8 @@ namespace TraversalReservation.Areas.Admin.Controllers
         private readonly ICommentService _commentService;
         private readonly IReservationService _reservationService;
         private readonly IGuideService _guideService;
+        private readonly IContactUsService _contactUsService;
+        private readonly IAnnouncementService _announcementService;
         private readonly UserManager<AppUser> _userManager;
 
         public AdminController
@@ -29,6 +32,8 @@ namespace TraversalReservation.Areas.Admin.Controllers
             ICommentService commentService,
             IReservationService reservationService,
             IGuideService guideService,
+            IContactUsService contactUsService,
+            IAnnouncementService announcementService,
             UserManager<AppUser> userManager)
 
         {
@@ -37,6 +42,9 @@ namespace TraversalReservation.Areas.Admin.Controllers
             _userManager = userManager;
             _reservationService = reservationService;
             _guideService = guideService;
+            _contactUsService = contactUsService;
+            _announcementService = announcementService;
+            
         }
         #endregion
 
@@ -49,58 +57,12 @@ namespace TraversalReservation.Areas.Admin.Controllers
             return View(values);
         }
 
-
         public IActionResult CityList()
         {
-            var jsonCity = JsonConvert.SerializeObject(_destinationService.TGetAllList());
-            return Json(jsonCity);
+            var cities = _destinationService.TGetAllList();
+            return Json(cities);
         }
 
-        [HttpPost]
-        public IActionResult AddCityDestination(Destination destination)
-        {
-            destination.Status = true;
-            _destinationService.TInsert(destination);
-            var values = JsonConvert.SerializeObject(destination);
-            return Json(values);
-        }
-
-        public IActionResult GetById(int DestinationID)
-        {
-            var values = _destinationService.TGetByID(DestinationID);
-            var jsonValues = JsonConvert.SerializeObject(values);
-            return Json(jsonValues);
-        }
-
-        public IActionResult UpdateCity(Destination destination)
-        {
-            _destinationService.TUpdate(destination);
-            var v = JsonConvert.SerializeObject(destination);
-            return Json(v);
-        }
-
-
-        //public static List<GetCityForAjax> cities = new List<GetCityForAjax>()
-        //{
-        //    new GetCityForAjax
-        //    {
-        //        CityID = 1,
-        //        CityName = "Üsküp",
-        //        CityCountry="Makedonya",
-        //    },
-        //     new GetCityForAjax
-        //    {
-        //        CityID = 2,
-        //        CityName = "Roma",
-        //        CityCountry="İtalya",
-        //    },
-        //      new GetCityForAjax
-        //    {
-        //        CityID = 3,
-        //        CityName = "Londra",
-        //        CityCountry="İngiltere",
-        //    }
-        //}
 
         #endregion
 
@@ -274,6 +236,69 @@ namespace TraversalReservation.Areas.Admin.Controllers
         }
 
 
+        #endregion
+
+        #region ContactUsOperation
+
+        public IActionResult ContactUs()
+        {
+            var values = _contactUsService.TGetListTRUE();
+            return View(values);
+        }
+
+        public IActionResult EditContactUs(int id)
+        {
+            var values = _contactUsService.TGetByID(id);
+            return View("EditContactUs", values);
+        }
+
+        public IActionResult DeleteContactUs(int id)
+        {
+            var values = _contactUsService.TGetByID(id);
+            values.Status = false;
+           _contactUsService.TUpdate(values);
+            return RedirectToAction("ContactUs");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateContactUs(ContactUs c)
+        {
+            _contactUsService.TUpdate(c);
+            return RedirectToAction("ContactUs");
+        }
+
+        #endregion
+
+        #region AnnouncementOperation
+        public IActionResult Announcement()
+        {
+            List<Announcement> values = _announcementService.TGetAllList();
+            List<AnnouncementViewModel> modal = new List<AnnouncementViewModel>();
+
+            foreach (var item in values)
+            {
+                AnnouncementViewModel announcementViewModel = new AnnouncementViewModel
+                {
+                    ID = item.AnnouncementID,
+                    Title = item.Title,
+                    Content = item.Content
+                };
+
+                modal.Add(announcementViewModel);
+            }
+            return View(modal);
+        }
+
+        public IActionResult AddAnnouncement()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddAnnouncement(Announcement a)
+        {
+            return View();
+        }
         #endregion
 
     }

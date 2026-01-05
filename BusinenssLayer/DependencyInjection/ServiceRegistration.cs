@@ -16,7 +16,7 @@ namespace BusinenssLayer.DependencyInjection
             services.AddScoped<IDestinationDal, EFDestinationDal>();
 
             //Comments
-            services.AddScoped<ICommentService, CommentManager> ();
+            services.AddScoped<ICommentService, CommentManager>();
             services.AddScoped<ICommentDal, EFCommentDal>();
 
             //Reservation
@@ -26,6 +26,15 @@ namespace BusinenssLayer.DependencyInjection
             //Guide
             services.AddScoped<IGuideService, GuideManager>();
             services.AddScoped<IGuideDal, EFGuideDal>();
+
+            //ContactUs
+            services.AddScoped<IContactUsService, ContactUsManager>();
+            services.AddScoped<IContactUsDal, EFContactUsDal>();
+
+            //Announcement
+            services.AddScoped<IAnnouncementService, AnnouncementManager>();
+            services.AddScoped<IAnnouncementDal, EFAnnouncementDal>();
+
             return services;
         }
     }

@@ -23,5 +23,14 @@ namespace BusinenssLayer.Validations
 
         public static string MaxLength(int length, string name)
             => $"{name} alanı en fazla {length} karakter olabilir.";
+
+
+        public const string OnlyLettersWithSpace = @"^\p{L}+(?:\s+\p{L}+)*$";
+
+        public const string OnlyNumberss = @"^\d+$";
+
+        public const string Email = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+
+
     }
 }
