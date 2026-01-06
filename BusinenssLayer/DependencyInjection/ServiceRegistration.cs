@@ -1,7 +1,10 @@
 ﻿using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
+using BusinenssLayer.Validations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.EntityFramework;
+using DTOLayers.DTOs.AnnouncementDTOs;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -36,6 +39,11 @@ namespace BusinenssLayer.DependencyInjection
             services.AddScoped<IAnnouncementDal, EFAnnouncementDal>();
 
             return services;
+        }
+
+        public static void CustomerValidator(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<AnnouncementDTO>, AnnouncementValidations>();
         }
     }
 

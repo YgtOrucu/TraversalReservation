@@ -1,6 +1,8 @@
-﻿using BusinenssLayer.Abstract;
+﻿using AutoMapper;
+using BusinenssLayer.Abstract;
 using BusinenssLayer.Concreate;
 using DataAccessLayer.EntityFramework;
+using DTOLayers.DTOs.AnnouncementDTOs;
 using EntityLayer.Concreate;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +27,7 @@ namespace TraversalReservation.Areas.Admin.Controllers
         private readonly IGuideService _guideService;
         private readonly IContactUsService _contactUsService;
         private readonly IAnnouncementService _announcementService;
+        private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
 
         public AdminController
@@ -34,6 +37,7 @@ namespace TraversalReservation.Areas.Admin.Controllers
             IGuideService guideService,
             IContactUsService contactUsService,
             IAnnouncementService announcementService,
+            IMapper mapper,
             UserManager<AppUser> userManager)
 
         {
@@ -43,6 +47,7 @@ namespace TraversalReservation.Areas.Admin.Controllers
             _reservationService = reservationService;
             _guideService = guideService;
             _contactUsService = contactUsService;
+            _mapper = mapper;
             _announcementService = announcementService;
             
         }
@@ -272,21 +277,8 @@ namespace TraversalReservation.Areas.Admin.Controllers
         #region AnnouncementOperation
         public IActionResult Announcement()
         {
-            List<Announcement> values = _announcementService.TGetAllList();
-            List<AnnouncementViewModel> modal = new List<AnnouncementViewModel>();
-
-            foreach (var item in values)
-            {
-                AnnouncementViewModel announcementViewModel = new AnnouncementViewModel
-                {
-                    ID = item.AnnouncementID,
-                    Title = item.Title,
-                    Content = item.Content
-                };
-
-                modal.Add(announcementViewModel);
-            }
-            return View(modal);
+            var values = _mapper.Map<List<AnnouncementViewModel>>(_announcementService.TGetAllList());
+            return View(values);
         }
 
         public IActionResult AddAnnouncement()
@@ -295,9 +287,20 @@ namespace TraversalReservation.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAnnouncement(Announcement a)
+        public IActionResult AddAnnouncement(AnnouncementDTO a)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _announcementService.TInsert(new Announcement()
+                {
+                    Content = a.Content,
+                    Title = a.Title,
+                    Date = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy")),
+                    Status = true
+                });
+                return RedirectToAction("Announcement");
+            }
+            return View(a);
         }
         #endregion
 

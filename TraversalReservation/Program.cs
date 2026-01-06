@@ -1,11 +1,9 @@
 ﻿using BusinenssLayer.DependencyInjection;
-using BusinenssLayer.Validations;
 using DataAccessLayer.Concreate;
-using DTOLayers.DTOs.AnnouncementDTOs;
 using EntityLayer.Concreate;
-using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using FluentValidation.AspNetCore;
 using Serilog;
 using Serilog.Events;
 
@@ -46,8 +44,11 @@ builder.Services
     .AddErrorDescriber<TurkishIdentityErrorDescriber>();
 
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddTransient<IValidator<AnnouncementDTO>, AnnouncementValidations>();
+builder.Services.AddControllersWithViews();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.CustomerValidator();
 builder.Services.AddBusinessLayer();
+
 
 // optional global auth filter
 builder.Services.AddMvc(config =>
