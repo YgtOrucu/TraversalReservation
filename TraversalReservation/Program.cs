@@ -43,6 +43,8 @@ builder.Services
     .AddEntityFrameworkStores<TraversalContext>()
     .AddErrorDescriber<TurkishIdentityErrorDescriber>();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
 builder.Services.AddFluentValidationAutoValidation();

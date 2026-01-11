@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concreate;
+﻿using DTOLayers.DTOs.AnnouncementDTOs;
+using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace BusinenssLayer.Abstract
 {
     public interface IAnnouncementService : IGenericService<Announcement>
     {
+        List<AnnouncementViewModel> TGetByStatus();
     }
 }

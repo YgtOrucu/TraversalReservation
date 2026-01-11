@@ -49,7 +49,7 @@ namespace TraversalReservation.Areas.Admin.Controllers
             _contactUsService = contactUsService;
             _mapper = mapper;
             _announcementService = announcementService;
-            
+
         }
         #endregion
 
@@ -261,7 +261,7 @@ namespace TraversalReservation.Areas.Admin.Controllers
         {
             var values = _contactUsService.TGetByID(id);
             values.Status = false;
-           _contactUsService.TUpdate(values);
+            _contactUsService.TUpdate(values);
             return RedirectToAction("ContactUs");
         }
 
@@ -275,12 +275,14 @@ namespace TraversalReservation.Areas.Admin.Controllers
         #endregion
 
         #region AnnouncementOperation
+
         public IActionResult Announcement()
         {
-            var values = _mapper.Map<List<AnnouncementViewModel>>(_announcementService.TGetAllList());
+            var values = _mapper.Map<List<AnnouncementViewModel>>(_announcementService.TGetByStatus());
             return View(values);
         }
 
+        #region Add
         public IActionResult AddAnnouncement()
         {
             return View();
@@ -302,6 +304,36 @@ namespace TraversalReservation.Areas.Admin.Controllers
             }
             return View(a);
         }
+        #endregion
+
+        #region Delete
+        public IActionResult DeleteAnnouncement(int id)
+        {
+            var values = _announcementService.TGetByID(id);
+            values.Status = false;
+            _announcementService.TUpdate(values);
+            return RedirectToAction("Announcement");
+        }
+        #endregion
+
+        #region EditAndUpdate
+
+        public IActionResult EditAnnouncement(int id)
+        {
+            var values = _announcementService.TGetByID(id);
+            return View("EditAnnouncement", values);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAnnouncement(Announcement a)
+        {
+            _announcementService.TUpdate(a);
+            return RedirectToAction("Announcement");
+        }
+
+
+        #endregion
+
         #endregion
 
     }

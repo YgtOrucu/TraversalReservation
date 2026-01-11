@@ -1,0 +1,60 @@
+﻿@model VisitorViewModel
+@{
+    ViewData["Title"] = "EditVisitor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .list-group li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .text-dark {
+        font-size: 15px;
+    }
+</style>
+
+<form action="@Url.Action("UpdateVisitor","VisitorApi", new { Area = "Admin" })" method="post">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <h5>Edit Visitor</h5>
+                    <hr class="horizontal gray-light my-4">
+                    <ul class="list-group">
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.HiddenFor(x => x.VisitorId)
+                        </li>
+                        <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            @Html.LabelFor(x => x.Name, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Surname, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Surname, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.City, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.City, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Country, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Country, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            @Html.LabelFor(x => x.Mail, new { @class = "text-dark" }) @Html.TextBoxFor(x => x.Mail, new { @class = "form-control", @style = "width:50%", @type = "text" })
+                        </li>
+                        <li class="list-group-item border-0 ps-0 text-sm">
+                            <div></div>
+                            <button type="submit" class="btn btn-primary">Update Visitor</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

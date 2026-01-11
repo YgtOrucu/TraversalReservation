@@ -1,0 +1,66 @@
+﻿@model List<VisitorViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!-- Basic Bootstrap Table -->
+<div class="card">
+    <h5 class="card-header">APİ Visitor List</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Surname</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">City</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Country</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mail</th>
+                    <th class="text-secondary opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var city = item.City.Split(',');
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <p class="text-xs text-secondary mb-0">@(item.Name)</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.Surname)</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-secondary text-xs font-weight-bold">@(item.City)</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">@(item.Country)</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-secondary text-xs font-weight-bold">@(item.Mail)</span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("EditVisitor", "VisitorApi", new { Area = "Admin", id = item.VisitorId })"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="@Url.Action("DeleteVisitor", "VisitorApi", new { Area = "Admin", id = item.VisitorId })"><i class="bx bx-edit-alt me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="@Url.Action("AddVisitor", "VisitorApi", new { Area = "Admin" })" class="btn btn-primary btn-sm" style="margin: 2rem 1rem 1rem 0;width: 80px;float: right;">Add</a>
+    </div>
+</div>
+<!--/ Basic Bootstrap Table -->

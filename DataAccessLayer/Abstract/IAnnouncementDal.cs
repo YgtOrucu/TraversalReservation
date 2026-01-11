@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concreate;
+﻿using DTOLayers.DTOs.AnnouncementDTOs;
+using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IAnnouncementDal : IGenericDal<Announcement>
     {
+        List<AnnouncementViewModel> GetByStatus();
     }
 }

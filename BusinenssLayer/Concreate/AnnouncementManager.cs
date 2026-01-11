@@ -1,5 +1,6 @@
 ﻿using BusinenssLayer.Abstract;
 using DataAccessLayer.Abstract;
+using DTOLayers.DTOs.AnnouncementDTOs;
 using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,11 @@ namespace BusinenssLayer.Concreate
         public Announcement TGetByID(int id)
         {
             return _announcementDal.GetByID(id);
+        }
+
+        public List<AnnouncementViewModel> TGetByStatus()
+        {
+            return _announcementDal.GetByStatus();
         }
 
         public List<Announcement> TGetListByFilter(Expression<Func<Announcement, bool>> filter)
