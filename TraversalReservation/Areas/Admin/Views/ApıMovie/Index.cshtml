@@ -1,0 +1,59 @@
+﻿@model List<ApiMovieViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Basic Bootstrap Table -->
+<div class="card">
+    <h5 class="card-header">Routes</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Movie Name</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Imdb Paunı</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Yapım Yılı</th> 
+                    <th class="text-secondary opacity-7">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div>
+                                    <img src="@(item.image)" class="avatar avatar-sm me-3" alt="user1">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h5 class="mb-0 text-sm">@(item.title)</h5>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">@(item.rating)</p>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-secondary text-xs font-weight-bold">@(item.year)</span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("EditMovie", "ApıMovie", new { Area = "Admin", id = item.rank })"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" target="_blank" href="@(item.imdb_link)"><i class="bx bx-edit-alt me-1"></i> Fragman</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="@Url.Action("AddMovie", "ApıMovie", new { Area = "Admin" })" class="btn btn-primary btn-sm" style="margin: 2rem 1rem 1rem 0;width: 80px;float: right;">Add</a>
+    </div>
+</div>
+<!--/ Basic Bootstrap Table -->
+

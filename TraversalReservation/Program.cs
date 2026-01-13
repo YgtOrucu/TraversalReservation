@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using FluentValidation.AspNetCore;
 using Serilog;
 using Serilog.Events;
+using TraversalReservation.CQRS.Handlers.DestinationHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ Log.Logger = new LoggerConfiguration()
 
 // 🔥 Serilog'u host'a bağla
 builder.Host.UseSerilog();
+
+builder.Services.AddScoped<GetAllDestinationQueryHandlers>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TraversalContext>();

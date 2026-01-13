@@ -1,0 +1,20 @@
+﻿@model List<BookingHotelSearchViewModel.Result>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Hotels</h2>
+
+@foreach (var hotel in Model)
+{
+    <div style="margin-bottom:20px">
+        <h3>@hotel.HotelName</h3>
+        <p>Şehir: @hotel.City</p>
+        <p>Puan: @hotel.ReviewScore (@hotel.ReviewScoreWord)</p>
+        <p>Fiyat: @hotel.MinTotalPrice @hotel.CurrencyCode</p>
+        <img src="@hotel.MainPhotoUrl" width="250" />
+        <hr />
+    </div>
+}
