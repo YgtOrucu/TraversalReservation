@@ -7,6 +7,7 @@ using FluentValidation.AspNetCore;
 using Serilog;
 using Serilog.Events;
 using TraversalReservation.CQRS.Handlers.DestinationHandlers;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.Services.AddScoped<GetAllDestinationQueryHandlers>();
+builder.Services.AddScoped<GetDestinationByIDQueryHandlers>();
+builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<TraversalContext>();
